@@ -11,18 +11,13 @@ public class Analyzer {
 
     public void analyze(){
         String noSpaceArray = input.replaceAll("\\s*", "");
-        Pattern pattern = Pattern.compile("[-]?[0-9]+|[-]|[+]|[*]*");
+        Pattern pattern = Pattern.compile("[/]|[)]|[(]|[-]?[0-9]+|[-]|[+]|[*]*");
         Matcher numbersAndPontuation = pattern.matcher(noSpaceArray);
-        String[] pontuacaoEBarraDeDivisao = pattern.split(noSpaceArray);
 
         while (numbersAndPontuation.find()) {
             if (!numbersAndPontuation.group().equals(""))
                 array.add(numbersAndPontuation.group());
         }
-
-        for(String valor:pontuacaoEBarraDeDivisao)
-            if(!valor.equals(""))
-                array.add(valor);
 
         checkAtributes();
         mostrar();
