@@ -7,22 +7,35 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Analyzer {
-    private String input = "(-423 - -12 - -16 * 2 ** 2 / 2)";
+    private String input = "423";
+    String noSpaceString = input.replaceAll("\\s*", "");
     private Token token = new Token();
     private List<String> array = new ArrayList<>();
 
+    public boolean isNumber(){
 
+        if(noSpaceString.matches("[0-9]*")){
+            return true;
+        }
+
+
+        return false;
+    }
+
+    public void getNumber(){
+        Pattern pattern = Pattern.compile("[-]?[0-9]*");
+        Matcher matcher = pattern.matcher(noSpaceString);
+
+        while (matcher.find()){
+            System.out.println(matcher.group());
+        }
+    }
 
     public void analyze(){
 
-        String noSpaceArray = input.replaceAll("\\s*", "");
-        Pattern pattern = Pattern.compile("[0-9]");
-        Matcher matcher = pattern.matcher(noSpaceArray);
-
-
-
-        while (matcher.find())
-        System.out.println(matcher.group());
+        if(isNumber()){
+            getNumber();
+        }
         
         //mostrar();
     }
