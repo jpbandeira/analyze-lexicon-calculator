@@ -6,15 +6,6 @@ public class Token {
     private String lexama;
     private String tipo;
     private String valor;
-    private ArrayList<String> operador = new ArrayList<>();
-    private ArrayList<String> pontuacao = new ArrayList<>();
-
-    private ArrayList<Token> resultado = new ArrayList<>();
-
-    public Token(){
-        operador.addAll(Arrays.asList("+","-", "*", "**", "/"));
-        pontuacao.addAll(Arrays.asList("(",")"));
-    }
 
     public String getLexama() {
         return lexama;
@@ -40,27 +31,12 @@ public class Token {
         this.valor = valor;
     }
 
-    public ArrayList<String> getOperador() {
-        return operador;
-    }
-
-    public void setOperador(ArrayList<String> operador) {
-        this.operador = operador;
-    }
-
-    public ArrayList<String> getPontuacao() {
-        return pontuacao;
-    }
-
-    public void setPontuacao(ArrayList<String> pontuacao) {
-        this.pontuacao = pontuacao;
-    }
-
-    public ArrayList<Token> getResultado() {
-        return resultado;
-    }
-
-    public void setResultado(ArrayList<Token> resultado) {
-        this.resultado = resultado;
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer();
+        sb.append("lexama='").append(lexama).append('\'');
+        sb.append(", tipo='").append(tipo).append('\'');
+        sb.append(", valor='").append(valor).append('\'');
+        return sb.toString();
     }
 }
