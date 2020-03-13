@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/compilers.iml" filepath="$PROJECT_DIR$/compilers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analyze-calculator.iml" filepath="$PROJECT_DIR$/analyze-calculator.iml" />
     </modules>
   </component>
 </project>
