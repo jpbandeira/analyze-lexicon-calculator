@@ -10,15 +10,40 @@ public class Analyzer {
     private List<String> array = new ArrayList<>();
     private List<Token> result = new ArrayList<>();
 
-    public void analyzeExpression(String input){
-            String noSpaceArray = input.replaceAll("\\s*", "");
-            Pattern pattern = Pattern.compile("[/]|[)]|[(]|[-]?[0-9]+|[-]|[+]|[*]*");
-            Matcher matchers = pattern.matcher(noSpaceArray);
+    Pattern pattern = Pattern.compile("[/]|[)]|[(]|[-]?[0-9]+|[-]|[+]|[*]*");
+    Pattern patternCaracteresInvalidos = Pattern.compile("[A-Z]+|[a-z]+");
+    /*Pattern patternPontuacao = Pattern.compile("[(]|[)]");*/
 
-            while (matchers.find()) {
-                if (!matchers.group().equals(""))
-                    array.add(matchers.group());
+    public void analyzeExpression(String input) throws Exception {
+            String noSpaceArray = input.replaceAll("\\s*", "");
+
+            Matcher matchers = pattern.matcher(noSpaceArray);
+            Matcher matchersCaracteresInvalidos = patternCaracteresInvalidos.matcher(noSpaceArray);
+            /*Matcher matchersPontuacao = patternPontuacao.matcher(noSpaceArray);*/
+
+            if (!matchersCaracteresInvalidos.find()) {
+                while (matchers.find()){
+                    if (!matchers.group().equals("")) {
+                        array.add(matchers.group());
+                    }
+                }
+            }else{
+                throw new Exception("Caractere Invalido: " + matchersCaracteresInvalidos.group());
             }
+
+/*            boolean teste = true;
+
+            while(matchers.find()) {
+
+                if (matchersNumeroInteiro.find()) {
+                    if (!matchersNumeroInteiro.group().equals(""))
+                        array.add(matchersNumeroInteiro.group());
+                }if(matchersPontuacao.find()){
+                    if (!matchersPontuacao.group().equals(""))
+                        array.add(matchersPontuacao.group());
+                }
+
+            }*/
 
             checkAtributes();
             showResults();
