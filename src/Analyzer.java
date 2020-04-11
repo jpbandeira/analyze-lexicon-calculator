@@ -48,68 +48,83 @@ public class Analyzer {
             checkAtributes();
             showResults();
     }
-    
+    String anterior = "";
     public void checkAtributes(){
         for(String value:array) {
-            switch (value) {
-                case "(":
+            char[] valor = value.toCharArray();
+                if (valor.length > 1 && valor[0] == '-' && isNumber(String.valueOf(valor[1])) && !anterior.equals("-")) {
                     token = new Token();
-                    token.setLexama(value);
-                    token.setTipo("pontuação");
-                    token.setValor("parenteseDireito");
-                    result.add(token);
-                    break;
-                case "+":
-                    token = new Token();
-                    token.setLexama(value);
-                    token.setTipo("operador");
-                    token.setValor("soma");
-                    result.add(token);
-                    break;
-                case "-":
-                    token = new Token();
-                    token.setLexama(value);
+                    token.setLexama(String.valueOf(valor[0]));
                     token.setTipo("operador");
                     token.setValor("subtracao");
                     result.add(token);
-                    break;
-                case "*":
-                    token = new Token();
-                    token.setLexama(value);
-                    token.setTipo("operador");
-                    token.setValor("multiplicação");
-                    result.add(token);
-                    break;
-                case "**":
-                    token = new Token();
-                    token.setLexama(value);
-                    token.setTipo("operador");
-                    token.setValor("exponenciação");
-                    result.add(token);
-                    break;
-                case "/":
-                    token = new Token();
-                    token.setLexama(value);
-                    token.setTipo("operador");
-                    token.setValor("divisão");
-                    result.add(token);
-                    break;
-                case ")":
-                    token = new Token();
-                    token.setLexama(value);
-                    token.setTipo("pontuação");
-                    token.setValor("parenteseEsquerdo");
-                    result.add(token);
-                    break;
-            }
-            if (isNumber(value) == true) {
-                token = new Token();
-                token.setLexama(value);
-                token.setTipo("numero");
-                token.setValor(value);
-                result.add(token);
-            }
 
+                    token = new Token();
+                    token.setLexama(String.valueOf(valor[1]));
+                    token.setTipo("numero");
+                    token.setValor(String.valueOf(valor[1]));
+                    result.add(token);
+            }else {
+                anterior = value;
+                switch (value) {
+                    case "(":
+                        token = new Token();
+                        token.setLexama(value);
+                        token.setTipo("pontuação");
+                        token.setValor("parenteseDireito");
+                        result.add(token);
+                        break;
+                    case "+":
+                        token = new Token();
+                        token.setLexama(value);
+                        token.setTipo("operador");
+                        token.setValor("soma");
+                        result.add(token);
+                        break;
+                    case "-":
+                        token = new Token();
+                        token.setLexama(value);
+                        token.setTipo("operador");
+                        token.setValor("subtracao");
+                        result.add(token);
+                        break;
+                    case "*":
+                        token = new Token();
+                        token.setLexama(value);
+                        token.setTipo("operador");
+                        token.setValor("multiplicação");
+                        result.add(token);
+                        break;
+                    case "**":
+                        token = new Token();
+                        token.setLexama(value);
+                        token.setTipo("operador");
+                        token.setValor("exponenciação");
+                        result.add(token);
+                        break;
+                    case "/":
+                        token = new Token();
+                        token.setLexama(value);
+                        token.setTipo("operador");
+                        token.setValor("divisão");
+                        result.add(token);
+                        break;
+                    case ")":
+                        token = new Token();
+                        token.setLexama(value);
+                        token.setTipo("pontuação");
+                        token.setValor("parenteseEsquerdo");
+                        result.add(token);
+                        break;
+                }
+                if (isNumber(value) == true) {
+                    token = new Token();
+                    token.setLexama(value);
+                    token.setTipo("numero");
+                    token.setValor(value);
+                    result.add(token);
+                }
+            }
         }
     }
 
