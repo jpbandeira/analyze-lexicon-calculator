@@ -7,6 +7,14 @@ public class Token {
     private String tipo;
     private String valor;
 
+    public Token() {}
+
+    public Token(String lexama, String tipo, String valor) {
+        this.lexama = lexama;
+        this.tipo = tipo;
+        this.valor = valor;
+    }
+
     public String getLexama() {
         return lexama;
     }

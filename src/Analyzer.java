@@ -36,78 +36,58 @@ public class Analyzer {
     }
 
     public void checkAtributes(){
+        StringBuffer stringBuffer = new StringBuffer();
         for(String value:array) {
             char[] valor = value.toCharArray();
                 if (valor.length > 1 && valor[0] == '-' && isNumber(String.valueOf(valor[1])) && !checkValues(anterior) /*!anterior.equals("-")*/) {
-                    token = new Token();
-                    token.setLexama(String.valueOf(valor[0]));
-                    token.setTipo("operador");
-                    token.setValor("subtracao");
+                    int i = 1;
+                    token = new Token(String.valueOf(valor[0]), "operador", "subtracao");
                     result.add(token);
-
-                    token = new Token();
-                    token.setLexama(String.valueOf(valor[1]));
-                    token.setTipo("numero");
-                    token.setValor(String.valueOf(valor[1]));
-                    result.add(token);
+                    if(isNumber(String.valueOf(valor[i]))) {
+                        while (i < valor.length) {
+                            char valorChar=valor[i];
+                            stringBuffer.append(valorChar);
+                            i++;
+                        }
+                        String valueStringBuffer = stringBuffer.toString();
+                        token = new Token(valueStringBuffer, "numero", valueStringBuffer);
+                        result.add(token);
+                        stringBuffer = new StringBuffer();
+                    }
             }else {
                 anterior = value;
                 switch (value) {
                     case "(":
-                        token = new Token();
-                        token.setLexama(value);
-                        token.setTipo("pontuação");
-                        token.setValor("parenteseDireito");
+                        token = new Token(value, "pontuação", "parenteseDireito");
                         result.add(token);
                         break;
                     case "+":
-                        token = new Token();
-                        token.setLexama(value);
-                        token.setTipo("operador");
-                        token.setValor("soma");
+                        token = new Token(value, "operador", "soma");
                         result.add(token);
                         break;
                     case "-":
-                        token = new Token();
-                        token.setLexama(value);
-                        token.setTipo("operador");
-                        token.setValor("subtracao");
+                        token = new Token(value, "operador", "subtracao");
                         result.add(token);
                         break;
                     case "*":
-                        token = new Token();
-                        token.setLexama(value);
-                        token.setTipo("operador");
-                        token.setValor("multiplicação");
+                        token = new Token(value, "operador", "multiplicação");
                         result.add(token);
                         break;
                     case "**":
-                        token = new Token();
-                        token.setLexama(value);
-                        token.setTipo("operador");
-                        token.setValor("exponenciação");
+                        token = new Token(value, "operador", "exponenciação");
                         result.add(token);
                         break;
                     case "/":
-                        token = new Token();
-                        token.setLexama(value);
-                        token.setTipo("operador");
-                        token.setValor("divisão");
+                        token = new Token(value, "operador", "divisão");
                         result.add(token);
                         break;
                     case ")":
-                        token = new Token();
-                        token.setLexama(value);
-                        token.setTipo("pontuação");
-                        token.setValor("parenteseEsquerdo");
+                        token = new Token(value, "pontuação", "parenteseEsquerdo");
                         result.add(token);
                         break;
                 }
                 if (isNumber(value) == true) {
-                    token = new Token();
-                    token.setLexama(value);
-                    token.setTipo("numero");
-                    token.setValor(value);
+                    token = new Token(value, "numero", value);
                     result.add(token);
                 }
             }
