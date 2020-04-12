@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -12,14 +13,13 @@ public class Analyzer {
 
     Pattern pattern = Pattern.compile("[/]|[)]|[(]|[-]?[0-9]+|[-]|[+]|[*]*");
     Pattern patternCaracteresInvalidos = Pattern.compile("[A-Z]+|[a-z]+");
-    /*Pattern patternPontuacao = Pattern.compile("[(]|[)]");*/
+    String anterior = "";
 
     public void analyzeExpression(String input) throws Exception {
             String noSpaceArray = input.replaceAll("\\s*", "");
 
             Matcher matchers = pattern.matcher(noSpaceArray);
             Matcher matchersCaracteresInvalidos = patternCaracteresInvalidos.matcher(noSpaceArray);
-            /*Matcher matchersPontuacao = patternPontuacao.matcher(noSpaceArray);*/
 
             if (!matchersCaracteresInvalidos.find()) {
                 while (matchers.find()){
@@ -31,28 +31,14 @@ public class Analyzer {
                 throw new Exception("Caractere Invalido: " + matchersCaracteresInvalidos.group());
             }
 
-/*            boolean teste = true;
-
-            while(matchers.find()) {
-
-                if (matchersNumeroInteiro.find()) {
-                    if (!matchersNumeroInteiro.group().equals(""))
-                        array.add(matchersNumeroInteiro.group());
-                }if(matchersPontuacao.find()){
-                    if (!matchersPontuacao.group().equals(""))
-                        array.add(matchersPontuacao.group());
-                }
-
-            }*/
-
             checkAtributes();
             showResults();
     }
-    String anterior = "";
+
     public void checkAtributes(){
         for(String value:array) {
             char[] valor = value.toCharArray();
-                if (valor.length > 1 && valor[0] == '-' && isNumber(String.valueOf(valor[1])) && !anterior.equals("-")) {
+                if (valor.length > 1 && valor[0] == '-' && isNumber(String.valueOf(valor[1])) && !checkValues(anterior) /*!anterior.equals("-")*/) {
                     token = new Token();
                     token.setLexama(String.valueOf(valor[0]));
                     token.setTipo("operador");
@@ -136,5 +122,16 @@ public class Analyzer {
     public void showResults(){
         for(Token value:result)
             System.out.println(value.toString());
+    }
+
+    public boolean checkValues(String value){
+        List<String> list = new ArrayList<>();
+        list.addAll(Arrays.asList("-","(",")","+","*","**","/"));
+        for(String valueOfList:list){
+            if(valueOfList.equals(value)){
+                return true;
+            }
+        }
+        return false;
     }
 }
