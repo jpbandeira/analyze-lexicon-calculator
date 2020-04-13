@@ -1,6 +1,11 @@
 # analyze-lexicon-calculator
 Compilers course code
 
+# Contribuintes
+https://github.com/albertoparente
+Para ter acesso ao repositório e realizar analize e teste do código.
+https://github.com/climarocha
+
 ## Explicação de download de projeto e execução, juntamento com acesso ao vídeo de execução.
 
 Link vídeo: Para vizualizar, basta entrar nesse link e logar com conta do Microsoft Teams.
