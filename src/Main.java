@@ -10,5 +10,4 @@ public class Main {
         input = scanner.nextLine();
         analyzer.analyzeExpression(input);
     }
-
 }
